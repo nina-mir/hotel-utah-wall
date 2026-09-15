@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>The sticker wall at Hotel Utah Saloon</title>
+<meta name="description" content="A zoomable recreation of the sticker wall beside the stage at Hotel Utah Saloon, San Francisco — with links to the bands.">
+<meta name="theme-color" content="#1a120c">
+<meta property="og:title" content="The sticker wall at Hotel Utah Saloon">
+<meta property="og:description" content="Every sticker on the wall beside the stage, zoomable, with links to the bands.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/wall.css">
+</head>
+<body>
+
+<div id="viewport">
+  <div id="stage">
+
+  <div class="ceiling"></div>
+  <div class="leftface"></div>
+  <div class="panel"></div>
+  <div class="panel-lower"></div>
+  <div class="trim"></div>
+  <div class="wainscot"><div class="scuff"></div></div>
+  <div class="conduit"></div><div class="conduit-v"></div>
+  <div class="switchbox"><i></i></div>
+
+  <!-- 1896 photograph -->
+  <div class="frame">
+    <span class="screw" style="left:18px;top:18px"></span><span class="screw" style="right:18px;top:18px"></span>
+    <span class="screw" style="left:18px;bottom:18px"></span><span class="screw" style="right:18px;bottom:18px"></span>
+    <div class="mat"><div class="photo">
+      <img src="img/corner-of-pacific-and-larkin-1896.jpg" alt="Corner of Pacific and Larkin, 1896" style="width:100%;height:100%;object-fit:cover;display:block">
+      
+      <div class="glass"></div>
+    </div></div>
+  </div>
+
+  <!-- sconce -->
+    <div id="stickers"></div>
+    <div class="glow"></div>
+    <div class="vignette"></div>
+  </div>
+</div>
+
+<div id="nav" title="Drag to move around the wall">
+  <canvas id="navc" width="84" height="112"></canvas>
+  <div id="navbox"></div>
+</div>
+
+<div id="zoom">
+  <button id="zin" aria-label="Zoom in" title="Zoom in (+)">+</button>
+  <button id="zout" aria-label="Zoom out" title="Zoom out (−)">−</button>
+  <button id="zfit" aria-label="Fit the whole wall" title="Fit whole wall (0)">□</button>
+</div>
+
+<div id="sheet" role="dialog" aria-label="Sticker details">
+  <span class="x" id="sx" role="button" tabindex="0" aria-label="Close">×</span>
+  <div class="nm" id="snm"></div>
+  <div class="ds" id="sds"></div>
+  <a class="go" id="sgo" target="_blank" rel="noopener">Open site ↗</a>
+</div>
+
+<div id="about">
+  <button id="ab">about these links</button>
+  <div class="body">
+    Stickers are photographs of the real wall at Hotel Utah Saloon, 500 4th Street, San Francisco.
+    Links were found by searching each name and point to the official site, Bandcamp, or social account
+    that best matches. Matching is done by name and logo, so a link may occasionally point to a different
+    act with the same name — entries marked (?) are educated guesses rather than confirmed matches.
+    Some stickers have no link because no matching artist could be found. Nothing here is affiliated with
+    or endorsed by the venue or the bands.
+    <a href="https://github.com/nina-mir/hotel-utah-wall/issues">Corrections welcome.</a>
+  </div>
+</div>
+
+<div id="hint">Tap a sticker for the band · pinch to zoom · <b id="rv">show links</b></div>
+<div class="cap">Hotel Utah Saloon, San Francisco — the wall beside the stage.</div>
+
+<script src="js/wall.js" type="module"></script>
+</body>
+</html>

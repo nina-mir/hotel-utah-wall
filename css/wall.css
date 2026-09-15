@@ -1,0 +1,203 @@
+/* ==========================================================================
+   The sticker wall at Hotel Utah Saloon
+   Scene is authored in a fixed 952 x 1265 coordinate space and transformed
+   to fit; see js/wall.js for the pan/zoom engine.
+   ========================================================================== */
+:root{
+    --wall:#4d3b2a;
+    --wall-lit:#7a5a38;
+    --wood:#3a2214;
+    --wood-lit:#6e4224;
+    --trim:#5a3a22;
+    --amber:#ffb347;
+  }
+  html,body{margin:0;background:#1a120c;height:100%;overflow:hidden;font-family:'Archivo Black',Impact,sans-serif}
+  #stage{
+    position:absolute;left:50%;top:50%;
+    width:952px;height:1265px;
+    transform-origin:center center;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 52% 24%, #9a7248 0%, #6a4f36 26%, #47342a 60%, #2c1f16 100%);
+  }
+  /* ceiling and its warm cove light */
+  .ceiling{position:absolute;left:0;top:0;width:100%;height:70px;
+    background:linear-gradient(#7a4a22,#b56a2f 60%,#8a5228);}
+  .ceiling:after{content:"";position:absolute;left:0;top:64px;width:100%;height:6px;background:#2a170c}
+  /* white electrical conduit */
+  .conduit{position:absolute;left:100px;top:100px;width:395px;height:9px;background:linear-gradient(#f4ecd8,#cbbfa4);border-radius:4px;box-shadow:0 2px 3px rgba(0,0,0,.5)}
+  .switchbox{position:absolute;left:8px;top:82px;width:96px;height:40px;background:linear-gradient(#efe7d2,#c9bea3);border-radius:3px;box-shadow:0 3px 5px rgba(0,0,0,.5)}
+  .switchbox i{position:absolute;left:24px;top:8px;width:36px;height:22px;background:#e9e1cc;border:2px solid #b8ad92;border-radius:2px}
+  .conduit-v{position:absolute;left:490px;top:104px;width:9px;height:22px;background:linear-gradient(90deg,#f4ecd8,#cbbfa4)}
+
+  /* the right-hand sticker panel: a slightly lighter painted board with bevelled trim */
+  .panel{position:absolute;left:498px;top:112px;width:392px;height:325px;
+    background:#6a5138;
+    box-shadow:inset 0 0 0 5px #4a3521, inset 0 0 0 7px #8a6a48, 0 4px 10px rgba(0,0,0,.4)}
+  .panel-lower{position:absolute;left:498px;top:437px;width:392px;height:545px;background:rgba(255,220,180,.03)}
+  .panel-lower:before{content:"";position:absolute;left:0;top:0;width:100%;height:6px;background:linear-gradient(#8a6a48,#4a3521)}
+  /* door trim on the far right */
+  .trim{position:absolute;left:905px;top:70px;width:47px;height:1000px;
+    background:repeating-linear-gradient(180deg,#6e4326 0 18px,#5a3419 18px 30px,#7b4c2b 30px 44px);
+    box-shadow:inset 4px 0 6px rgba(0,0,0,.6)}
+  .trim:after{content:"";position:absolute;left:0;top:0;width:100%;height:100%;
+    background:linear-gradient(90deg,rgba(255,180,90,.25),transparent 40%,rgba(0,0,0,.35))}
+  /* wainscot / bench below the wall */
+  .wainscot{position:absolute;left:0;top:982px;width:952px;height:283px;
+    background:
+      linear-gradient(180deg,#6b3f22 0 14px,#3b2314 14px 22px,#2b1a10 22px 60px,#231409 60px 100%);}
+  .wainscot:after{content:"";position:absolute;left:0;top:22px;width:100%;height:110px;
+    background:repeating-linear-gradient(94deg,rgba(0,0,0,.18) 0 3px,transparent 3px 11px,rgba(255,200,140,.05) 11px 13px)}
+  .wainscot .scuff{position:absolute;left:600px;top:60px;width:300px;height:60px;
+    background:radial-gradient(ellipse,rgba(255,220,180,.12),transparent 70%)}
+  /* left dark wall face (wall turns a corner) */
+  .leftface{position:absolute;left:0;top:70px;width:50px;height:912px;background:linear-gradient(90deg,#1d130b,#3a2616);box-shadow:inset -6px 0 12px rgba(0,0,0,.6)}
+
+  /* ---------- the framed 1896 photograph ---------- */
+  .frame{position:absolute;left:55px;top:300px;width:360px;height:300px;
+    background:linear-gradient(135deg,#8b4a2a,#5c2e18 60%,#7a4123);
+    box-shadow:0 6px 14px rgba(0,0,0,.55), inset 0 0 0 2px rgba(0,0,0,.35);}
+  .frame .screw{position:absolute;width:8px;height:8px;border-radius:50%;background:radial-gradient(#e6e0d0,#8a8478);box-shadow:0 1px 2px rgba(0,0,0,.6)}
+  .frame .screw:before{content:"";position:absolute;left:3px;top:1px;width:2px;height:6px;background:#3a3a3a;transform:rotate(30deg)}
+  .frame .mat{position:absolute;left:38px;top:40px;width:284px;height:220px;background:#20170f;
+    box-shadow:inset 0 0 0 3px #0d0905, inset 0 0 0 6px #3b2a1a}
+  .frame .photo{position:absolute;left:8px;top:8px;width:268px;height:204px;background:#c9b48a;overflow:hidden}
+  .frame .glass{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.25),transparent 35%,transparent 70%,rgba(255,240,200,.18));pointer-events:none}
+  .frame .caption{position:absolute;left:14px;top:12px;font:7px 'Special Elite',monospace;color:#3a2a1a;background:#e8dcc0;padding:1px 4px;letter-spacing:.5px}
+
+  /* ---------- the sconce ---------- */
+  .sconce-base{position:absolute;left:440px;top:378px;width:104px;height:104px;border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#c9a15a,#7a5a2a 55%,#3a2a12);
+    box-shadow:0 8px 18px rgba(0,0,0,.6), inset 0 -8px 14px rgba(0,0,0,.5)}
+  .sconce-cup{position:absolute;left:459px;top:370px;width:64px;height:34px;border-radius:0 0 34px 34px;
+    background:linear-gradient(#c8a85a,#6a4a1a);box-shadow:0 4px 8px rgba(0,0,0,.5)}
+  .sconce{animation:flicker 5s infinite ease-in-out;transform-origin:50% 55%}.flame-unused{position:absolute;left:448px;top:232px;width:86px;height:145px;
+    border-radius:45% 45% 48% 48% / 55% 55% 40% 40%;
+    background:radial-gradient(circle at 50% 60%,#fff8dc 0%,#ffe8a3 25%,#ffb84a 55%,#e07a22 85%);
+    box-shadow:0 0 18px 6px #ffcf6a, 0 0 60px 20px rgba(255,170,60,.55), 0 0 140px 50px rgba(255,140,40,.35);
+    filter:blur(.3px);
+    animation:flicker 4s infinite ease-in-out}
+  .flame:before{content:"";position:absolute;left:18px;top:-18px;width:50px;height:50px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+    background:radial-gradient(circle at 50% 70%,#fff6d8,#ffc766 60%,#f0902e);transform:rotate(-12deg);box-shadow:0 0 14px 4px #ffd27a}
+  .flame:after{content:"";position:absolute;left:12px;top:22px;width:62px;height:100px;border-radius:50%;
+    background:repeating-radial-gradient(circle at 50% 50%,rgba(255,255,255,.18) 0 4px,transparent 4px 9px);opacity:.6}
+  @keyframes flicker{0%,100%{filter:brightness(1)}23%{filter:brightness(1.04)}41%{filter:brightness(.985)}67%{filter:brightness(1.025)}85%{filter:brightness(.995)}}
+  @media (prefers-reduced-motion:reduce){.sconce{animation:none}}
+
+  /* light: a warm glow that lifts everything near the bulb, and a vignette that sinks the corners */
+  .glow{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+    background:radial-gradient(circle at 51.5% 27%,rgba(255,215,140,.85) 0%,rgba(255,180,90,.5) 9%,rgba(255,150,60,.24) 20%,rgba(255,130,50,.09) 34%,transparent 58%)}
+  .vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse at 52% 30%,transparent 30%,rgba(0,0,0,.25) 60%,rgba(0,0,0,.62) 100%)}
+
+  /* ---------- stickers ---------- */
+  .s{position:absolute;display:block;object-fit:cover;align-items:center;justify-content:center;text-align:center;
+    line-height:.95;overflow:hidden;box-sizing:border-box;
+    box-shadow:0 1px 1.5px rgba(0,0,0,.55), 0 0 0 .5px rgba(0,0,0,.25);
+    text-shadow:none;user-select:none}
+  .s.ro{border-radius:50%} .s.rd{border-radius:3px} .s.cut{box-shadow:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.6))}
+  .s.pill{border-radius:999px}
+  .s.rd{border-radius:4px}
+  .s.oval{border-radius:50%}
+  .s.cut{box-shadow:0 1px 1.5px rgba(0,0,0,.55);}
+  /* subtle wear: ink softening + faint gloss */
+  
+  .s.peel:before{content:"";position:absolute;right:-6px;bottom:-6px;width:16px;height:16px;background:linear-gradient(135deg,transparent 50%,#d9cfb8 50%);transform:rotate(0deg);z-index:2}
+  .holo{background:linear-gradient(120deg,#f6d3ff,#9be7ff 25%,#c9ffb0 45%,#ffe9a3 65%,#ffb3d4 85%,#c8d6ff)!important;color:#1b1430!important;
+    text-shadow:0 0 2px #fff}
+  .holo:after{background:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 2px,transparent 2px 5px)!important}
+  .gothic{font-family:'UnifrakturCook',serif;font-weight:700}
+  .metal{font-family:'Metal Mania',cursive;letter-spacing:.5px}
+  .marker{font-family:'Permanent Marker',cursive}
+  .bangers{font-family:'Bangers',cursive;letter-spacing:1px}
+  .type{font-family:'Special Elite',monospace}
+  .rye{font-family:'Rye',serif}
+  .hand{font-family:'Caveat',cursive;font-weight:700}
+  .anton{font-family:'Anton',Impact,sans-serif}
+  .right{font-family:'Righteous',sans-serif}
+  .s svg{width:100%;height:100%;display:block}
+  .s .sub{display:block;font-size:.55em;opacity:.85;margin-top:2px}
+  .s .ring{position:absolute;inset:6%;border-radius:50%;border:1.5px solid currentColor}
+  .s .ringtext{position:absolute;inset:0;font-size:6px;letter-spacing:.5px}
+
+  /* caption, the one bit of UI */
+
+  .pin{position:absolute;display:block;text-decoration:none;cursor:pointer;transition:transform .15s,filter .15s;z-index:3}
+  .pin.nolink{cursor:default}
+  .pin:hover{transform:scale(1.14) !important;filter:drop-shadow(0 0 10px rgba(255,220,150,.85));z-index:40}
+  .pin .lbl{position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%);
+    white-space:nowrap;font:600 11px/1.3 'Special Elite',monospace;color:#f5e6c8;background:rgba(18,10,4,.94);
+    border:1px solid rgba(255,200,120,.45);border-radius:3px;padding:3px 7px;opacity:0;pointer-events:none;transition:opacity .15s}
+  .pin:hover .lbl{opacity:1}
+  body.reveal .pin:not(.nolink){box-shadow:0 0 0 2px rgba(255,210,120,.75),0 0 12px rgba(255,190,90,.6)}
+  #hint{position:fixed;left:10px;bottom:calc(34px + env(safe-area-inset-bottom));font:12px 'Special Elite',monospace;color:#d9c39a;z-index:99}
+  #hint b{cursor:pointer;color:#ffcf82;border-bottom:1px dotted;padding-bottom:1px}
+
+  #about{position:fixed;right:12px;bottom:34px;max-width:330px;z-index:99;font:11.5px/1.5 'Special Elite',monospace;color:#e2cfa8}
+  #about button{font:12px 'Special Elite',monospace;color:#ffcf82;background:rgba(18,10,4,.9);
+    border:1px solid rgba(255,200,120,.4);border-radius:3px;padding:4px 9px;cursor:pointer}
+  #about .body{display:none;margin-top:6px;background:rgba(16,9,4,.96);border:1px solid rgba(255,200,120,.35);
+    border-radius:4px;padding:10px 12px;color:#e2cfa8}
+  #about.open .body{display:block}
+  #about a{color:#ffcf82}
+
+  html,body{overscroll-behavior:none;touch-action:none;-webkit-text-size-adjust:100%}
+  #viewport{position:fixed;inset:0;overflow:hidden;cursor:grab}
+  #viewport.grabbing{cursor:grabbing}
+  #stage{left:0 !important;top:0 !important;will-change:transform;transform-origin:0 0 !important}
+
+  /* navigator: the little map of the wall with a viewfinder box */
+  #nav{position:fixed;right:10px;top:calc(10px + env(safe-area-inset-top));width:84px;z-index:90;
+    border:1px solid rgba(255,200,120,.45);border-radius:4px;overflow:hidden;
+    background:#2a1d13;box-shadow:0 3px 12px rgba(0,0,0,.6);cursor:pointer;touch-action:none}
+  #nav canvas{display:block;width:100%;opacity:.92}
+  #navbox{position:absolute;border:1.5px solid #ffcf82;background:rgba(255,200,120,.16);
+    box-shadow:0 0 6px rgba(255,190,90,.7);pointer-events:none}
+
+  /* zoom buttons */
+  #zoom{position:fixed;right:10px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:90;display:flex;flex-direction:column;gap:6px}
+  #zoom button{width:38px;height:38px;font:20px/1 'Special Elite',monospace;color:#ffcf82;
+    background:rgba(18,10,4,.92);border:1px solid rgba(255,200,120,.4);border-radius:5px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent}
+  #zoom button:active{background:rgba(60,35,12,.95)}
+
+  /* bottom sheet: how a tapped sticker identifies itself on touch */
+  #sheet{position:fixed;left:0;right:0;bottom:0;z-index:120;transform:translateY(105%);
+    transition:transform .22s ease;background:rgba(14,8,3,.97);border-top:1px solid rgba(255,200,120,.4);
+    padding:14px 16px calc(16px + env(safe-area-inset-bottom));color:#e8d6b2;
+    font:13px/1.5 'Special Elite',monospace}
+  #sheet.up{transform:translateY(0)}
+  #sheet .nm{font-size:17px;color:#fff0d0;margin-bottom:2px}
+  #sheet .ds{opacity:.8;margin-bottom:10px}
+  #sheet a.go{display:inline-block;padding:8px 14px;border-radius:5px;background:#ffcf82;color:#1a1006;
+    text-decoration:none;font-weight:700}
+  #sheet .x{position:absolute;right:12px;top:10px;font-size:20px;color:#c9ab7e;cursor:pointer;padding:4px 8px}
+
+  @media (max-width:560px){
+    #nav{width:66px}
+    .cap{display:none}
+    #hint{left:0;right:0;bottom:0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+      font-size:11px;background:linear-gradient(transparent,rgba(0,0,0,.82) 45%);text-align:center}
+    #about{right:8px;bottom:calc(42px + env(safe-area-inset-bottom));max-width:min(320px,80vw)}
+    #about button{font-size:11px;padding:4px 8px}
+    #zoom{bottom:calc(58px + env(safe-area-inset-bottom))}
+    #zoom button{width:42px;height:42px}
+    .pin .lbl{display:none}
+  }
+  .cap{position:fixed;left:0;right:0;bottom:0;padding:8px 14px calc(8px + env(safe-area-inset-bottom));font:13px/1.35 'Special Elite',monospace;color:#d9c39a;
+    background:linear-gradient(transparent,rgba(0,0,0,.75));pointer-events:none}
+
+/* --------------------------------------------------------------------------
+   Stickers are built by js/wall.js: the <a|span class="pin"> carries the
+   position and rotation, the <img> inside simply fills it.
+   -------------------------------------------------------------------------- */
+.pin > img.s{
+  position:static;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  left:auto;top:auto;
+  transform:none;
+}
+.pin > img.s.cut{box-shadow:none}
