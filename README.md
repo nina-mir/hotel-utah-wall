@@ -46,6 +46,12 @@ The light and the framed 1896 photograph of Pacific & Larkin are part of the sce
 markup rather than the sticker data. The sconce is drawn in SVG; the photograph is a
 crop of the print hanging on the wall.
 
+## Adding a sticker
+
+Bands keep playing the room. See
+[HOW-TO-ADD-A-NEW-IMAGE.md](HOW-TO-ADD-A-NEW-IMAGE.md) — crop the image, add an entry to
+`data/stickers.json`, push.
+
 ## About the links
 
 Links were found by searching each sticker's name and point to the official site,
